@@ -17,16 +17,22 @@ import com.techelevator.tickets.data.SectionDAO;
 import com.techelevator.tickets.data.TicketsDAO;
 import com.techelevator.tickets.models.Buyer;
 import com.techelevator.tickets.models.Event;
+import com.techelevator.tickets.models.Section;
 
 @RestController
 public class TicketsApplicationController {
 	
 	@Autowired
 	TicketsDAO ticketsDAO;
+	@Autowired
 	BuyerDAO buyerDAO;
+	@Autowired
 	EventDAO eventDAO;
+	@Autowired
 	RowDAO rowDAO;
+	@Autowired
 	SeatDAO seatDAO;
+	@Autowired
 	SectionDAO sectionDAO;
 	
 	@RequestMapping(path="/buyer", method = RequestMethod.POST)
@@ -81,6 +87,33 @@ public class TicketsApplicationController {
 	@RequestMapping(path="/event/{id}", method = RequestMethod.DELETE)
 	public void delectEvent(@PathVariable int id) {
 		eventDAO.deleteEvent(id);
+	}
+	
+	@RequestMapping(path="/section", method = RequestMethod.POST)
+	public void createSection(@RequestBody Section section) {
+		sectionDAO.createSection(section);
+	}
+	
+	@RequestMapping(path="/section", method = RequestMethod.GET)
+	public List<Section> getAllSections() {
+		List<Section> output = sectionDAO.getAllSections();
+		return output;
+	}
+	
+	@RequestMapping(path="/section/{id}", method = RequestMethod.GET)
+	public Section getSection(@PathVariable int id) {
+		Section output = sectionDAO.getSection(id);
+		return output;
+	}
+	
+	@RequestMapping(path="/section/{id}", method = RequestMethod.PUT)
+	public void updateSection(@RequestBody Section section, @PathVariable int id) {
+		sectionDAO.updateSection(section, id);
+	}
+	
+	@RequestMapping(path="/section/{id}", method = RequestMethod.DELETE)
+	public void deleteSection(@PathVariable int id) {
+		sectionDAO.deleteSection(id);
 	}
 
 }

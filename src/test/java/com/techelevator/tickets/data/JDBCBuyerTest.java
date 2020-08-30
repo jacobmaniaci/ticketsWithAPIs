@@ -2,12 +2,17 @@ package com.techelevator.tickets.data;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.awt.List;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 
@@ -54,14 +59,14 @@ public class JDBCBuyerTest {
 	@Test
 	public void createBuyerTest() {
 		Buyer buyer = new Buyer(99999999, "Test", "Tester");
-		List<Buyer> results = new ArrayList<>();
+		List<Buyer> results = new ArrayList<Buyer>();
 		results = dao.getAllBuyers();
 		results.add(buyer);
 		
 		boolean actual = results.contains(buyer);
 		
 		assertEquals(true, actual);
-		assertEquals
+		
 	}
 
 }

@@ -1,7 +1,6 @@
 package com.techelevator.tickets.data;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -17,11 +16,13 @@ import com.techelevator.tickets.models.Event;
 public class JDBCEventDAO implements EventDAO {
 
 	private JdbcTemplate template;
+	private JDBCSectionDAO sectionDAO;
 
 	public JDBCEventDAO(DataSource dataSource) {
 		template = new JdbcTemplate(dataSource);
+		sectionDAO = new JDBCSectionDAO(dataSource);
 	}
-
+ 
 	@Override
 	public void createEvent(Event event) {
 		String sql = "INSERT INTO event (event_name, event_date) VALUES (?, ?)";
@@ -29,13 +30,13 @@ public class JDBCEventDAO implements EventDAO {
 		Date eventDate = event.getEventDate();
 		
 		template.update(sql, eventName, eventDate);
-		
 	}
 
+	@SuppressWarnings("null")
 	@Override
 	public List<Event> getAllEvents() {
 		String sql = "SELECT * FROM event";
-		List<Event> output = null;
+		List<Event> output = new ArrayList<>();
 		SqlRowSet results = template.queryForRowSet(sql);
 		
 		while (results.next()) {
