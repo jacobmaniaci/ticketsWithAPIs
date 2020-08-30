@@ -69,9 +69,12 @@ public class JDBCBuyerDAO implements BuyerDAO {
 	}
 
 	@Override
-	public void updateBuyer(Buyer buyer) {
+	public void updateBuyer(Buyer buyer, int id) {
+		String sql = "UPDATE buyer SET first_name = ?, last_name = ? WHERE buyer_id = ?";
+		String firstName = buyer.getFirstName();
+		String lastName = buyer.getLastName();
 		
-		
+		template.update(sql, firstName, lastName, id);
 	}
 
 	@Override

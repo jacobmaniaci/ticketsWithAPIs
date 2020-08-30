@@ -16,6 +16,7 @@ import com.techelevator.tickets.data.SeatDAO;
 import com.techelevator.tickets.data.SectionDAO;
 import com.techelevator.tickets.data.TicketsDAO;
 import com.techelevator.tickets.models.Buyer;
+import com.techelevator.tickets.models.Event;
 
 @RestController
 public class TicketsApplicationController {
@@ -50,9 +51,36 @@ public class TicketsApplicationController {
 		buyerDAO.deleteBuyer(id);
 	}
 	
-	@RequestMapping(path="/buyer", method = RequestMethod.PUT)
-	public void updateBuyer(@RequestBody Buyer buyer) {
-		buyerDAO.updateBuyer(buyer);
+	@RequestMapping(path="/buyer/{id}", method = RequestMethod.PUT)
+	public void updateBuyer(@RequestBody Buyer buyer, @PathVariable int id) {
+		buyerDAO.updateBuyer(buyer, id);
+	}
+	
+	@RequestMapping(path="/event", method = RequestMethod.POST)
+	public void createEvent(@RequestBody Event event) {
+		eventDAO.createEvent(event);
+	}
+	
+	@RequestMapping(path="/event", method = RequestMethod.GET)
+	public List<Event> getAllEvents() {
+		List<Event> output = eventDAO.getAllEvents();
+		return output;
+	}
+	
+	@RequestMapping(path="/event/{id}", method = RequestMethod.GET)
+	public Event getEvent(@PathVariable int id) {
+		Event output = eventDAO.getEvent(id);
+		return output;
+	}
+	
+	@RequestMapping(path="/event/{id}", method = RequestMethod.PUT)
+	public void updateEvent(@RequestBody Event event, @PathVariable int id) {
+		eventDAO.updateEvent(event, id);
+	}
+	
+	@RequestMapping(path="/event/{id}", method = RequestMethod.DELETE)
+	public void delectEvent(@PathVariable int id) {
+		eventDAO.deleteEvent(id);
 	}
 
 }

@@ -9,7 +9,7 @@ public interface EventDAO {
 	public void createEvent(Event event);
 	public List<Event> getAllEvents();
 	public Event getEvent(int id);
-	public void updateEvent(Event event);
+	public void updateEvent(Event event, int id);
 	public void deleteEvent(int id);
 	
 }

@@ -9,7 +9,7 @@ public interface BuyerDAO {
 	public void createBuyer(Buyer buyer);
 	public List<Buyer> getAllBuyers();
 	public Buyer getBuyer(int id);
-	public void updateBuyer(Buyer buyer);
+	public void updateBuyer(Buyer buyer, int id);
 	public void deleteBuyer(int id);
 
 }
