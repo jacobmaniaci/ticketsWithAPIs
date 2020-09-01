@@ -17,7 +17,9 @@ import com.techelevator.tickets.data.SectionDAO;
 import com.techelevator.tickets.data.TicketsDAO;
 import com.techelevator.tickets.models.Buyer;
 import com.techelevator.tickets.models.Event;
+import com.techelevator.tickets.models.EventAdmin;
 import com.techelevator.tickets.models.Section;
+import com.techelevator.tickets.models.WebEventInput;
 
 @RestController
 public class TicketsApplicationController {
@@ -63,13 +65,13 @@ public class TicketsApplicationController {
 	}
 	
 	@RequestMapping(path="/event", method = RequestMethod.POST)
-	public void createEvent(@RequestBody Event event) {
-		eventDAO.createEvent(event);
+	public void createEvent(@RequestBody WebEventInput event) {
+		eventDAO.createEvent(event.getName(), event.getEventDate());
 	}
 	
 	@RequestMapping(path="/event", method = RequestMethod.GET)
-	public List<Event> getAllEvents() {
-		List<Event> output = eventDAO.getAllEvents();
+	public List<EventAdmin> getAllEvents() {
+		List<EventAdmin> output = eventDAO.getAllEvents();
 		return output;
 	}
 	

@@ -77,6 +77,8 @@ CONSTRAINT fk_ticket_buyer_id FOREIGN KEY (buyer_id)  REFERENCES buyer (buyer_id
 
 );
 
+ALTER TABLE available_tickets ADD event_date date;
+
 END;
 
 SELECT * FROM buyer;
@@ -91,3 +93,8 @@ SELECT * FROM section;
 INSERT INTO section (section_name, section_price) VALUES ('Test', 300.00);
 UPDATE section SET section_name = 'Tester', section_price = 299.99 WHERE section_id = 1;
 
+SELECT * FROM available_tickets WHERE event_name = 'Test An Event Creation';
+
+SELECT * FROM available_tickets WHERE event_name = 'Test';
+DELETE FROM available_tickets;
+SELECT * FROM available_tickets;
