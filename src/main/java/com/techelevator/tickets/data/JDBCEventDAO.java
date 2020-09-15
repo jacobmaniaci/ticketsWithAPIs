@@ -95,24 +95,35 @@ public class JDBCEventDAO implements EventDAO {
 	}
 
 	@Override
-	public List<EventAdmin> getAllEvents() {
-		return null;
+	public List<String> getAllEvents() {
+		String sql = "SELECT event_name, event_date FROM available_tickets GROUP BY event_name, event_date";
+		List<String> output = new ArrayList<>();
+		SqlRowSet results = template.queryForRowSet(sql);
+		String addOn = "";
+		
+		while (results.next()) {
+			addOn = results.getString("event_name") + "   " + results.getDate("event_date");
+			output.add(addOn);
+		}
+		
+		return output;
 	}
 
 	@Override
 	public Event getEvent(int id) {
 		return null;
-		
+		// do not currently need to get a single event
 	}
 
 	@Override
 	public void updateEvent(Event event, int id) {
-		
+		// no current need to update events
+		String sql = "UPDATE available_tickets SET event_name = ?, event_date = ? WHERE event_id = ?";
 	}
 
 	@Override
 	public void deleteEvent(int id) {
-		
+		// events will not be deleted, tickets will be sold or unsold
 	}
 	
 	private EventAdmin mapRowToTicket(SqlRowSet results) {

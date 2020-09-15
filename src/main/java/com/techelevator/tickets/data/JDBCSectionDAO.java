@@ -36,18 +36,16 @@ public class JDBCSectionDAO implements SectionDAO {
 	
 
 	@Override
-	public List<Section> getAllSections() {
-		String sql = "SELECT * FROM section";
-		SqlRowSet result = template.queryForRowSet(sql);
-		List<Section> output = new ArrayList<>();
+	public List<String> getAllSections(String eventName) {
+		String sql = "SELECT section, price FROM available_tickets WHERE event_name = ? GROUP BY section, price";
+		SqlRowSet result = template.queryForRowSet(sql, eventName);
+		List<String> output = new ArrayList<>();
+		String addOn = "";
 
 		while (result.next()) {
-			int id = result.getInt("section_id");
-			String sectionName = result.getString("section_name");
-			BigDecimal sectionPrice = result.getBigDecimal("section_price");
-
-			Section section = new Section(id, sectionName, sectionPrice);
-			output.add(section);
+			addOn = result.getString("section") + "\t\t" + result.getBigDecimal("price");
+			
+			output.add(addOn);
 
 		}
 

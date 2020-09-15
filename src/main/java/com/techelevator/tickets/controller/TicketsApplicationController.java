@@ -66,12 +66,13 @@ public class TicketsApplicationController {
 	
 	@RequestMapping(path="/event", method = RequestMethod.POST)
 	public void createEvent(@RequestBody WebEventInput event) {
+		// JSON form for event is "yyyy-mm-dd"
 		eventDAO.createEvent(event.getName(), event.getEventDate());
 	}
 	
 	@RequestMapping(path="/event", method = RequestMethod.GET)
-	public List<EventAdmin> getAllEvents() {
-		List<EventAdmin> output = eventDAO.getAllEvents();
+	public List<String> getAllEvents() {
+		List<String> output = eventDAO.getAllEvents();
 		return output;
 	}
 	
@@ -86,36 +87,10 @@ public class TicketsApplicationController {
 		eventDAO.updateEvent(event, id);
 	}
 	
-	@RequestMapping(path="/event/{id}", method = RequestMethod.DELETE)
-	public void delectEvent(@PathVariable int id) {
-		eventDAO.deleteEvent(id);
-	}
-	
-	@RequestMapping(path="/section", method = RequestMethod.POST)
-	public void createSection(@RequestBody Section section) {
-		sectionDAO.createSection(section);
-	}
-	
-	@RequestMapping(path="/section", method = RequestMethod.GET)
-	public List<Section> getAllSections() {
-		List<Section> output = sectionDAO.getAllSections();
+	@RequestMapping(path="/event/{eventName}/section", method = RequestMethod.GET)
+	public List<String> getAllSections(@PathVariable String eventName) {
+		List<String> output = sectionDAO.getAllSections(eventName);
 		return output;
-	}
-	
-	@RequestMapping(path="/section/{id}", method = RequestMethod.GET)
-	public Section getSection(@PathVariable int id) {
-		Section output = sectionDAO.getSection(id);
-		return output;
-	}
-	
-	@RequestMapping(path="/section/{id}", method = RequestMethod.PUT)
-	public void updateSection(@RequestBody Section section, @PathVariable int id) {
-		sectionDAO.updateSection(section, id);
-	}
-	
-	@RequestMapping(path="/section/{id}", method = RequestMethod.DELETE)
-	public void deleteSection(@PathVariable int id) {
-		sectionDAO.deleteSection(id);
 	}
 
 }

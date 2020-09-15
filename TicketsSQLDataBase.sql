@@ -98,3 +98,5 @@ SELECT * FROM available_tickets WHERE event_name = 'Test An Event Creation';
 SELECT * FROM available_tickets WHERE event_name = 'Test';
 DELETE FROM available_tickets;
 SELECT * FROM available_tickets;
+SELECT event_name, event_date FROM available_tickets GROUP BY event_name, event_date;
+SELECT section, price FROM available_tickets WHERE event_name = 'Football Game' GROUP BY section, price;

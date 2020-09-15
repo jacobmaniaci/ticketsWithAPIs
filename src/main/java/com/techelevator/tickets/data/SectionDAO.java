@@ -7,7 +7,7 @@ import com.techelevator.tickets.models.Section;
 public interface SectionDAO {
 	
 	public void createSection(Section section);
-	public List<Section> getAllSections();
+	public List<String> getAllSections(String eventName);
 	public Section getSection(int id);
 	public void updateSection(Section section, int id);
 	public void deleteSection(int id);
